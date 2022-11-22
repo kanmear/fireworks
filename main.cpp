@@ -1,5 +1,5 @@
-#include "stdio.h"
 #include <SFML/Graphics.hpp>
+#include <iostream>
 
 using namespace sf;
 
@@ -14,6 +14,7 @@ int main() {
         window.close();
     }
 
+    std::cout << "debug log test";
     window.clear();
 
     window.display();
