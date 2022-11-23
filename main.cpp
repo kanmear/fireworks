@@ -7,8 +7,6 @@
 
 using namespace sf;
 
-// void drawFireworks(RenderWindow &window, CircleShape &shape);
-
 int main() {
   RenderWindow window(VideoMode(200, 200), "fireworks");
   window.setFramerateLimit(120);
@@ -23,7 +21,7 @@ int main() {
         window.close();
     }
 
-    // std::cout << "debug log test";
+    // std::cout << "debug log test\n";
     window.clear();
 
     drawFireworks(window, shape);
@@ -33,9 +31,3 @@ int main() {
 
   return 0;
 }
-
-// void drawFireworks(RenderWindow &window, CircleShape &shape) {
-//   shape.move(0.3f, 0.f);
-
-//   window.draw(shape);
-// }
