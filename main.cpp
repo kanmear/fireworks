@@ -1,4 +1,5 @@
 // #include "fireworks.h"
+#include "fireworks.h"
 #include <SFML/Graphics.hpp>
 #include <SFML/Graphics/CircleShape.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
@@ -6,7 +7,7 @@
 
 using namespace sf;
 
-void drawFireworks(RenderWindow &window, CircleShape &shape);
+// void drawFireworks(RenderWindow &window, CircleShape &shape);
 
 int main() {
   RenderWindow window(VideoMode(200, 200), "fireworks");
@@ -33,8 +34,8 @@ int main() {
   return 0;
 }
 
-void drawFireworks(RenderWindow &window, CircleShape &shape) {
-  shape.move(0.3f, 0.f);
+// void drawFireworks(RenderWindow &window, CircleShape &shape) {
+//   shape.move(0.3f, 0.f);
 
-  window.draw(shape);
-}
+//   window.draw(shape);
+// }
