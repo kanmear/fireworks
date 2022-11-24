@@ -18,11 +18,21 @@ int main() {
     while (window.pollEvent(event)) {
       if (event.type == Event::Closed)
         window.close();
+      
+      if (event.type == Event::KeyPressed) {
+        if (event.key.code == Keyboard::F) {
+          std::cout << "F pressed\n";
+          move(shape, 20.f, 20.f);
+        }
+      }
     }
 
     // std::cout << "debug log test\n";
     window.clear();
 
+    if (Keyboard::isKeyPressed(Keyboard::Key::F)) {
+      
+    }
     drawFireworks(window, shape);
 
     window.display();
