@@ -10,5 +10,5 @@ fireworks-app: main.o fireworks.o
 main.o: main.cpp
 	$(CXX) -c "main.cpp" -o main.o
 
-main.o: fireworks.cpp
+fireworks.o: fireworks.cpp
 	$(CXX) -c "fireworks.cpp" -o fireworks.o
