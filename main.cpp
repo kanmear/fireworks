@@ -1,4 +1,3 @@
-// #include "fireworks.h"
 #include "fireworks.h"
 #include <SFML/Graphics.hpp>
 #include <SFML/Graphics/CircleShape.hpp>
@@ -29,5 +28,5 @@ int main() {
     window.display();
   }
 
-  return 0;
+  return 1;
 }
