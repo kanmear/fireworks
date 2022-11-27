@@ -14,24 +14,27 @@ int main() {
   shape.setFillColor(Color::Red);
 
   while (window.isOpen()) {
+    window.setKeyRepeatEnabled(false);
+
     Event event;
     while (window.pollEvent(event)) {
       if (event.type == Event::Closed)
         window.close();
       
-      if (event.type == Event::KeyPressed) {
-        if (event.key.code == Keyboard::F) {
-          std::cout << "F pressed\n";
-          move(shape, 20.f, 20.f);
-        }
-      }
+      // if (event.type == Event::KeyPressed) {
+      //   if (event.key.code == Keyboard::F) {
+      //     std::cout << "F pressed\n";
+      //     move(shape, 20.f, 20.f);
+      //   }
+      // }
     }
 
     // std::cout << "debug log test\n";
     window.clear();
 
     if (Keyboard::isKeyPressed(Keyboard::Key::F)) {
-      
+          std::cout << "F pressed\n";
+          move(shape, 20.f, 20.f);
     }
     drawFireworks(window, shape);
 
