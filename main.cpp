@@ -29,7 +29,7 @@ int main() {
         if (event.key.code == Keyboard::F) {
           std::cout << "F pressed\n";
           acceleration -= 15.f;
-          shape.move(0.f, -100.f);
+          shape.move(0.f, -1.f);
         }
       }
     }
@@ -41,6 +41,8 @@ int main() {
     std::cout << std::to_string(shape.getPosition().y) + "\n";
     if (shape.getPosition().y + 100.f < window.getSize().y) {
       shape.move(0.f, acceleration + gravity);
+    } else {
+      shape.setPosition(shape.getPosition().x, window.getSize().y - 100.f);
     }
     // std::cout << "debug log test\n";
     window.clear();
