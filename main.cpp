@@ -35,7 +35,7 @@ int main() {
     }
     
     if (acceleration < 0.f) {
-      acceleration += 0.3f;
+      acceleration += 0.3f * -1.f / (acceleration / 2.f);
     }
     
     std::cout << std::to_string(shape.getPosition().y) + "\n";
@@ -43,6 +43,7 @@ int main() {
       shape.move(0.f, acceleration + gravity);
     } else {
       shape.setPosition(shape.getPosition().x, window.getSize().y - 100.f);
+      acceleration = 0.f;
     }
     // std::cout << "debug log test\n";
     window.clear();
