@@ -4,12 +4,11 @@
 using namespace sf;
 
 class FireworkRocket {
-    private:
+    public:
         CircleShape& shapeOfRocket;
         int amountOfStars;
         float acceleration;
 
-    public:
         FireworkRocket(CircleShape& shapeOfRocket_, int amt, float acc) 
         : shapeOfRocket(shapeOfRocket_), amountOfStars(amt), acceleration(acc)
         {}
