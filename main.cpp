@@ -1,4 +1,4 @@
-#include "fireworks.h"
+#include "PhysicsHandler.h"
 #include "FireworkRocket.h"
 #include <SFML/Graphics.hpp>
 #include <SFML/Graphics/CircleShape.hpp>
@@ -27,15 +27,14 @@ int main() {
   positionDebug.setCharacterSize(24);
   positionDebug.setFillColor(Color::Red);
   
-  float acceleration = -0.f;
-  float gravity = 9.8f;
 
   CircleShape shape(50.f);
   shape.setFillColor(Color::Red);
   
   shape.setPosition(window.getSize().x / 2, window.getSize().y - 100.f);
 
-  FireworkRocket fireworkRocket(shape, 5, acceleration);
+  FireworkRocket fireworkRocket(shape, 5, 0.f);
+  float &acceleration = fireworkRocket.acceleration;
 
   std::cout << std::to_string(window.getSize().y) + "\n";
   while (window.isOpen()) {
@@ -48,36 +47,24 @@ int main() {
       if (event.type == Event::KeyPressed) {
         if (event.key.code == Keyboard::F) {
           // std::cout << "F pressed\n";
-          acceleration -= 14.f;
-          shape.move(0.f, -1.f);
+          fireworkRocket.acceleration -= 14.3f;
+          fireworkRocket.shapeOfRocket.move(0.f, -1.f);
+        }
+        else if (event.key.code == Keyboard::T) {
+          fireworkRocket.acceleration = 0.f;
+          fireworkRocket.shapeOfRocket.move(0.f, -1.f);
         }
       }
     }
 
-    if (acceleration < 0.f) {
-      acceleration += 0.3f * -1.f / (acceleration / 2.f);
-    }
-    
-    // std::cout << std::to_string(shape.getPosition().y) + "\n";
-    if (shape.getPosition().y + 100.f < window.getSize().y) {
-      fireworkRocket.moveRocket(0.f, acceleration + gravity);
-      // shape.move(0.f, acceleration + gravity);
-    } else {
-      shape.setPosition(shape.getPosition().x, window.getSize().y - 100.f);
-      acceleration = 0.f;
-    }
-    
-    accelerationDebug.setString("Acceleration: " + std::to_string(acceleration));
-    positionDebug.setString("Position \nx:" + std::to_string(shape.getPosition().x)
-      + "\ny:" + std::to_string(shape.getPosition().y));
-    // std::cout << "debug log test\n";
+    PhysicsHandler::handle(window, fireworkRocket);
+
     window.clear();
 
-    // if (Keyboard::isKeyPressed(Keyboard::Key::F)) {
-    //       std::cout << "F pressed\n";
-    //       accelerate(shape);
-    // }
-    // drawFireworks(window, shape);
+    accelerationDebug.setString("Acceleration: " + std::to_string(acceleration));
+    positionDebug.setString("Position \nx:" + std::to_string(fireworkRocket.shapeOfRocket.getPosition().x)
+      + "\ny:" + std::to_string(shape.getPosition().y));
+
     window.draw(shape);
     window.draw(accelerationDebug);
     window.draw(positionDebug);
