@@ -7,16 +7,17 @@ using namespace sf;
 
 void PhysicsHandler::handle(RenderWindow &window, FireworkRocket &fireworkRocket) {
     float gravity = 9.8f;
+    float &acceleration = fireworkRocket.acceleration;
     CircleShape &shape = fireworkRocket.shapeOfRocket;
 
-    if (fireworkRocket.acceleration < 0.f) {
-      fireworkRocket.acceleration += 0.3f * -1.f / (fireworkRocket.acceleration / 2.f);
+    if (acceleration < 0.f) {
+      acceleration += 0.3f * -1.f / (acceleration / 2.f);
     }
     
     if (shape.getPosition().y + 100.f < window.getSize().y) {
-      fireworkRocket.moveRocket(0.f, fireworkRocket.acceleration + gravity);
+      fireworkRocket.moveRocket(0.f, acceleration + gravity);
     } else {
       shape.setPosition(shape.getPosition().x, window.getSize().y - 100.f);
-      fireworkRocket.acceleration = 0.f;
+      acceleration = 0.f;
     }
 }
