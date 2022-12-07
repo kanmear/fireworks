@@ -12,6 +12,10 @@ void PhysicsHandler::handle(RenderWindow &window, FireworkRocket &fireworkRocket
 
     if (acceleration < 0.f) {
       acceleration += 0.3f * -1.f / (acceleration / 2.f);
+      shape.setFillColor(Color::Red);
+    } 
+    if (-acceleration - 1.0f <= gravity && -acceleration + 1.0f >= gravity) {
+      shape.setFillColor(Color::Transparent);
     }
     
     if (shape.getPosition().y + 100.f < window.getSize().y) {
