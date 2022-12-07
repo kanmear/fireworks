@@ -57,9 +57,9 @@ int main() {
       }
     }
 
-    PhysicsHandler::handle(window, fireworkRocket);
-
     window.clear();
+
+    PhysicsHandler::handle(window, fireworkRocket);
 
     accelerationDebug.setString("Acceleration: " + std::to_string(acceleration));
     positionDebug.setString("Position \nx:" + std::to_string(fireworkRocket.shapeOfRocket.getPosition().x)

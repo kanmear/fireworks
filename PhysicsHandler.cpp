@@ -16,6 +16,14 @@ void PhysicsHandler::handle(RenderWindow &window, FireworkRocket &fireworkRocket
     } 
     if (-acceleration - 1.0f <= gravity && -acceleration + 1.0f >= gravity) {
       shape.setFillColor(Color::Transparent);
+      for (int i = 0; i < fireworkRocket.amountOfStars; i++) {
+        CircleShape star(5.0f);
+        // star.setOrigin(10, 10);
+        star.setFillColor(Color::Red);
+        star.setPosition(shape.getPosition().x + (i * 10), shape.getPosition().y + (i * 10));
+        // star.setPosition(50, 50);
+        window.draw(star);
+      }
     }
     
     if (shape.getPosition().y + 100.f < window.getSize().y) {
