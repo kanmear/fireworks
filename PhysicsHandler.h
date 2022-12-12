@@ -6,5 +6,5 @@ using namespace sf;
 
 class PhysicsHandler {
     public:
-        static void handle(RenderWindow &window, FireworkRocket &fireworkRocket);
+        static void handle(RenderWindow &window, FireworkRocket &fireworkRocket, FireworkRocket* &pointer);
 };

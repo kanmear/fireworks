@@ -12,7 +12,7 @@ int main() {
   window.setFramerateLimit(120);
   window.setKeyRepeatEnabled(false);
   
-  // accelerationDebug and font
+  // text for debugging
   Font font;
   font.loadFromFile("terminus.ttf");
   
@@ -26,14 +26,15 @@ int main() {
   positionDebug.setFont(font);
   positionDebug.setCharacterSize(24);
   positionDebug.setFillColor(Color::Red);
-  
+  // text for debugging
 
   CircleShape shape(50.f);
   shape.setFillColor(Color::Red);
   
   shape.setPosition(window.getSize().x / 2, window.getSize().y - 100.f);
 
-  FireworkRocket fireworkRocket(shape, 5, 0.f);
+  FireworkRocket fireworkRocket(shape, 5, 0.f), 
+    *fireworkRocketPointer;
   float &acceleration = fireworkRocket.acceleration;
 
   std::cout << std::to_string(window.getSize().y) + "\n";
@@ -59,13 +60,18 @@ int main() {
 
     window.clear();
 
-    PhysicsHandler::handle(window, fireworkRocket);
+    if (fireworkRocketPointer != nullptr) {
+      PhysicsHandler::handle(window, fireworkRocket, fireworkRocketPointer);
 
-    accelerationDebug.setString("Acceleration: " + std::to_string(acceleration));
-    positionDebug.setString("Position \nx:" + std::to_string(fireworkRocket.shapeOfRocket.getPosition().x)
-      + "\ny:" + std::to_string(shape.getPosition().y));
+      accelerationDebug.setString("Acceleration: " + std::to_string(acceleration));
+      positionDebug.setString("Position \nx:" + std::to_string(fireworkRocket.shapeOfRocket.getPosition().x)
+        + "\ny:" + std::to_string(shape.getPosition().y));
 
-    window.draw(shape);
+      window.draw(shape);
+    } else {
+      std::cout << std::to_string(0) + "\n";
+    }
+
     window.draw(accelerationDebug);
     window.draw(positionDebug);
 
