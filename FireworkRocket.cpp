@@ -1,5 +1,9 @@
 #include "FireworkRocket.h"
 
-void FireworkRocket::moveRocket(float x, float y) {
-    shapeOfRocket.move(x, y);
+vector<FireworkRocket> FireworkHandler::fireworksVector = vector<FireworkRocket>();
+
+void FireworkHandler::launch() {
+    FireworkRocket fireworkRocket = FireworkRocket();
+
+    FireworkHandler::fireworksVector.push_back(fireworkRocket);
 }

@@ -1,9 +1,9 @@
 #include "PhysicsHandler.h"
 #include "FireworkRocket.h"
 #include "DebugHandler.h"
+#include "Utility.h"
 #include <SFML/Graphics.hpp>
 #include <SFML/Graphics/CircleShape.hpp>
-#include <SFML/Graphics/RenderWindow.hpp>
 #include <vector>
 #include <iostream>
 
@@ -11,10 +11,13 @@ using namespace std;
 using namespace sf;
 
 void drawDebug(RenderWindow &window);
+void drawRockets(RenderWindow &window);
 
 int main() {
   // configure window 
   RenderWindow window(VideoMode(200, 200), "fireworks");
+  Utility::windowHeight = window.getSize().y;
+  Utility::windowWidth = window.getSize().x;
   window.setFramerateLimit(120);
   window.setKeyRepeatEnabled(false);
   
@@ -33,6 +36,7 @@ int main() {
       if (event.type == Event::KeyPressed) {
         if (event.key.code == Keyboard::F) {
           // launch a rocket
+          FireworkHandler::launch();
         }
       }
     }
@@ -41,6 +45,8 @@ int main() {
     
     // draw debug info
     drawDebug(window);
+
+    drawRockets(window);
 
     // handle rockets and particles
 
@@ -53,5 +59,11 @@ int main() {
 void drawDebug(RenderWindow &window) {
   for (int i = 0; i < DebugHandler::textVector.size(); i++) {
     window.draw(DebugHandler::textVector[i]);
+  }
+};
+
+void drawRockets(RenderWindow &window) {
+  for (int i = 0; i < FireworkHandler::fireworksVector.size(); i++) {
+    window.draw(FireworkHandler::fireworksVector[i].rocketShape);
   }
 };
