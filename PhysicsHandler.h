@@ -5,6 +5,8 @@
 using namespace sf;
 
 class PhysicsHandler {
+    private:
+        static float gravity;
     public:
-        static void handle(RenderWindow &window, FireworkRocket &fireworkRocket, FireworkRocket* &pointer);
+        static void handle();
 };

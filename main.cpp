@@ -46,6 +46,7 @@ int main() {
     // draw debug info
     drawDebug(window);
 
+    PhysicsHandler::handle();
     drawRockets(window);
 
     // handle rockets and particles

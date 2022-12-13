@@ -25,7 +25,7 @@ class FireworkRocket {
             CircleShape rocketShape_ = CircleShape(), 
             float shapeRadius = 5.0f,
             int amountOfStars_ = 5, 
-            float acc = 10.0f) 
+            float acc = 16.0f) 
         : rocketShape(rocketShape_), amountOfStars(amountOfStars_), acceleration(acc) { 
             rocketShape.setRadius(shapeRadius);
             rocketShape.setFillColor(Color::Red);
