@@ -7,4 +7,6 @@ class Utility {
     public:
         static int windowHeight;
         static int windowWidth;
+
+        static int getRandomIntInRange(int i, int j);
 };

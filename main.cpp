@@ -40,6 +40,9 @@ int main() {
 
     window.clear();
     
+    int randomInt = Utility::getRandomIntInRange(-10, 10);
+    DebugHandler::addNewText("random int", 
+      to_string(randomInt));
     DebugHandler::addNewText("amount of rockets", 
       to_string(FireworkHandler::fireworksVector.size()));
 
