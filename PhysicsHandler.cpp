@@ -15,6 +15,11 @@ void PhysicsHandler::handle() {
       CircleShape &shape = rocket.rocketShape;
       float &acceleration = rocket.acceleration;
       // std::cout << to_string(acceleration) + "\n";
+      if (acceleration == 0.f) {
+        FireworkHandler::fireworksVector.erase(
+          FireworkHandler::fireworksVector.begin() + i
+        );
+      }
 
       if (acceleration > 0.f) {
         std::cout << "lowering acceleration " + to_string(acceleration) + "\n";
@@ -35,19 +40,4 @@ void PhysicsHandler::handle() {
         acceleration = 0.f;
       }
     }
-
-    // if (-acceleration - 1.0f <= gravity && -acceleration + 1.0f >= gravity) {
-    //   shape.setFillColor(Color::Transparent);
-    //   // delete pointer;
-    //   // pointer = nullptr;
-    //   // return;
-    //   for (int i = 0; i < fireworkRocket.amountOfStars; i++) {
-    //     CircleShape star(5.0f);
-    //     // star.setOrigin(10, 10);
-    //     star.setFillColor(Color::Red);
-    //     star.setPosition(shape.getPosition().x + (i * 10), shape.getPosition().y + (i * 10));
-    //     // star.setPosition(50, 50);
-    //     window.draw(star);
-    //   }
-    // }
 }

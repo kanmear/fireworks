@@ -40,16 +40,15 @@ int main() {
 
     window.clear();
     
-
     DebugHandler::addNewText("amount of rockets", 
       to_string(FireworkHandler::fireworksVector.size()));
+
     // draw debug info
     drawDebug(window);
 
+    // handle rockets and particles
     PhysicsHandler::handle();
     drawRockets(window);
-
-    // handle rockets and particles
 
     window.display();
   }
