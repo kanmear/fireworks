@@ -24,9 +24,6 @@ int main() {
   // debugging
   DebugHandler::setFont();
 
-  DebugHandler::addNewText("test");
-  DebugHandler::addNewText("test2");
-
   // main loop
   while (window.isOpen()) {
     Event event;
@@ -43,6 +40,9 @@ int main() {
 
     window.clear();
     
+
+    DebugHandler::addNewText("amount of rockets", 
+      to_string(FireworkHandler::fireworksVector.size()));
     // draw debug info
     drawDebug(window);
 

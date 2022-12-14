@@ -15,5 +15,5 @@ class DebugHandler {
 
         static void setFont();
         static void setProperties(Text &text);
-        static void addNewText(String string);
+        static void addNewText(String name, String value);
 };

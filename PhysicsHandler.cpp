@@ -21,10 +21,11 @@ void PhysicsHandler::handle() {
         acceleration -= 0.3f / (acceleration / 2.f);
       } 
 
-      std::cout << "y position + diameter " + to_string(shape.getPosition().y + (shape.getRadius() * 2)) 
+      // std::cout << "y position + diameter " + to_string(shape.getPosition().y + (shape.getRadius() * 2)) 
+      DebugHandler::addNewText("Speed" + to_string(i), to_string(acceleration));
         + "window height " + to_string(Utility::windowHeight) + "\n";
       if (shape.getPosition().y + (shape.getRadius() * 2) <= Utility::windowHeight) {
-        std::cout << "moving shape " + to_string(acceleration) + "\n";
+        // std::cout << "moving shape " + to_string(acceleration) + "\n";
         shape.move(0.f, -acceleration + gravity);
       } else {
         // std::cout << "hit floor " + to_string(acceleration) + "\n";
