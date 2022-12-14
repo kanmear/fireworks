@@ -36,7 +36,7 @@ void DebugHandler::addNewText(String name, String value) {
         DebugHandler::setProperties(text);
 
         text.setString(name + ":" + value);
-        text.setPosition(0, DebugHandler::yPosition);
+        text.setPosition(5, DebugHandler::yPosition);
         
         DebugHandler::textVector.push_back(text);
         DebugHandler::yPosition += 20;
