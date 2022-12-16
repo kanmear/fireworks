@@ -42,6 +42,8 @@ int main() {
     window.clear();
     
     // draw debug info
+    DebugHandler::addNewText("fps", 
+      to_string(Utility::calculateFPS()));
     DebugHandler::addNewText("width", 
       to_string(Utility::windowWidth));
     DebugHandler::addNewText("height", 

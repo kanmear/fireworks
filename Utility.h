@@ -8,5 +8,10 @@ class Utility {
         static int windowHeight;
         static int windowWidth;
 
+        static Clock clock;
+        static Time previousTimeValue;
+        static int lowestFPSValue;
+
         static int getRandomIntInRange(int i, int j);
+        static int calculateFPS();
 };
