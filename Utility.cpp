@@ -9,7 +9,6 @@ int Utility::windowWidth = 0;
 
 Clock Utility::clock = Clock();
 Time Utility::previousTimeValue = clock.getElapsedTime();
-int Utility::lowestFPSValue = 120;
 
 int Utility::getRandomIntInRange(int i, int j) {
     random_device randomDevice;

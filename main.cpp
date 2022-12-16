@@ -44,10 +44,10 @@ int main() {
     // draw debug info
     DebugHandler::addNewText("fps", 
       to_string(Utility::calculateFPS()));
-    DebugHandler::addNewText("width", 
-      to_string(Utility::windowWidth));
-    DebugHandler::addNewText("height", 
-      to_string(Utility::windowHeight));
+    // DebugHandler::addNewText("width", 
+    //   to_string(Utility::windowWidth));
+    // DebugHandler::addNewText("height", 
+    //   to_string(Utility::windowHeight));
     DebugHandler::addNewText("amount of rockets", 
       to_string(FireworkHandler::fireworksVector.size()));
     DebugHandler::addNewText("amount of particles", 
