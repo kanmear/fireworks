@@ -56,9 +56,12 @@ void PhysicsHandler::handle() {
       if (shape.getPosition().y <= 
       Utility::windowHeight * (1.f / 3.f) + Utility::getRandomIntInRange(1, Utility::windowHeight / 7)) {
         
-        calculateParticlesMovement(rocket.amountOfStars, shape.getPosition(), Color::Magenta);
-        calculateParticlesMovement(rocket.amountOfStars / 2, shape.getPosition(), Color::Cyan);
-        calculateParticlesMovement(rocket.amountOfStars / 3, shape.getPosition(), Color::Yellow);
+        calculateParticlesMovement(rocket.amountOfStars, shape.getPosition(), 
+          Utility::getRandomColor());
+        calculateParticlesMovement(rocket.amountOfStars / 2, shape.getPosition(), 
+          Utility::getRandomColor());
+        calculateParticlesMovement(rocket.amountOfStars / 3, shape.getPosition(),
+          Utility::getRandomColor());
 
         FireworkHandler::fireworksVector.erase(
           FireworkHandler::fireworksVector.begin() + i

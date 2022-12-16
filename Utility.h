@@ -13,4 +13,5 @@ class Utility {
 
         static int getRandomIntInRange(int i, int j);
         static int calculateFPS();
+        static Color getRandomColor();
 };
