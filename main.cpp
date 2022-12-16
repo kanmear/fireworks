@@ -40,13 +40,14 @@ int main() {
 
     window.clear();
     
-    int randomInt = Utility::getRandomIntInRange(-10, 10);
-    DebugHandler::addNewText("random int", 
-      to_string(randomInt));
+    // draw debug info
     DebugHandler::addNewText("amount of rockets", 
       to_string(FireworkHandler::fireworksVector.size()));
+    DebugHandler::addNewText("width", 
+      to_string(Utility::windowWidth));
+    DebugHandler::addNewText("height", 
+      to_string(Utility::windowHeight));
 
-    // draw debug info
     drawDebug(window);
 
     // handle rockets and particles

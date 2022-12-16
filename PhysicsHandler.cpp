@@ -16,8 +16,6 @@ void PhysicsHandler::handle() {
       FireworkRocket &rocket = FireworkHandler::fireworksVector[i];
       CircleShape &shape = rocket.rocketShape;
       float &vSpeed = rocket.vSpeed;
-
-      int hSpeedDir = rocket.hSpeed > 0 ? 1 : -1;
       float &hSpeed = rocket.hSpeed;
 
       if (vSpeed == 0.f) {
@@ -29,14 +27,11 @@ void PhysicsHandler::handle() {
       if (vSpeed > 0.f) {
         vSpeed -= 0.3f / (vSpeed / 2.f);
       } 
-      // if (hSpeed > 0.f) {
-      //   hSpeed -= 0.3f / (hSpeed / 2.f) * hSpeedDir;
-      // } 
 
       // DebugHandler::addNewText("vSpeed" + to_string(i), to_string(vSpeed));
       //   + "window height " + to_string(Utility::windowHeight) + "\n";
-      DebugHandler::addNewText("hSpeed" + to_string(i), to_string(hSpeed));
-        + "window width " + to_string(Utility::windowWidth) + "\n";
+      // DebugHandler::addNewText("hSpeed" + to_string(i), to_string(hSpeed));
+      //   + "window width " + to_string(Utility::windowWidth) + "\n";
       if (shape.getPosition().y + (shape.getRadius() * 2) <= Utility::windowHeight) {
         shape.move(hSpeed, -vSpeed + gravity);
       } else {
