@@ -47,11 +47,13 @@ void PhysicsHandler::handle() {
 
       // exploding rockets
       if (rocket.alive && 
-      shape.getPosition().y <= Utility::windowHeight * (1.f / 3.f)) {
+      shape.getPosition().y <= 
+      Utility::windowHeight * (1.f / 3.f) + Utility::getRandomIntInRange(1, Utility::windowHeight / 10)) {
         shape.setFillColor(Color::Transparent);
         rocket.alive = false;
         
         calculateParticlesMovement(rocket.amountOfStars, shape.getPosition(), Color::Magenta);
+        calculateParticlesMovement(rocket.amountOfStars / 2, shape.getPosition(), Color::Cyan);
       }
     }
 
