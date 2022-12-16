@@ -12,7 +12,7 @@ using namespace std;
 
 float PhysicsHandler::gravity = 9.8f;
 
-void calculateParticlesMovement(int amountOfParticles, Vector2<float> position, Color color); 
+void calculateParticlesMovement(int amountOfParticles, Vector2<float> position, Color color, float distanceModifier = 1.f); 
 
 void PhysicsHandler::handle() {
     for (int i = 0; i < FireworkHandler::fireworksVector.size(); i++) {
@@ -60,8 +60,14 @@ void PhysicsHandler::handle() {
           Utility::getRandomColor());
         calculateParticlesMovement(rocket.amountOfStars / 2, shape.getPosition(), 
           Utility::getRandomColor());
+        // calculateParticlesMovement(rocket.amountOfStars / 2, shape.getPosition(), 
+        //   Utility::getRandomColor(), 1 / 10.f);
+        calculateParticlesMovement(rocket.amountOfStars / 2, shape.getPosition(), 
+          Utility::getRandomColor(), 1 / 6.f);
         calculateParticlesMovement(rocket.amountOfStars / 3, shape.getPosition(),
           Utility::getRandomColor());
+        calculateParticlesMovement(rocket.amountOfStars / 3, shape.getPosition(), 
+          Utility::getRandomColor(), 1 / 8.f);
 
         FireworkHandler::fireworksVector.erase(
           FireworkHandler::fireworksVector.begin() + i
@@ -96,7 +102,7 @@ void PhysicsHandler::handle() {
     }
 }
 
-void calculateParticlesMovement(int amountOfParticles, Vector2<float> position, Color color) {
+void calculateParticlesMovement(int amountOfParticles, Vector2<float> position, Color color, float distanceModifier) {
   const float d1 = 1.f;
   float d = 1.f;
   float step = 1.f / amountOfParticles * 4.f;
@@ -114,6 +120,11 @@ void calculateParticlesMovement(int amountOfParticles, Vector2<float> position, 
       pHspeed += pHspeed > 0 ? 0.05f : -0.05f;            
     }
 
-    FireworkParticleHandler::launch(position, pVspeed, pHspeed, color);
+    FireworkParticleHandler::launch(position, 
+      pVspeed * distanceModifier, 
+      pHspeed * distanceModifier, color,
+      distanceModifier == 1.f 
+        ? 1
+        : pow(distanceModifier, -1) / 2);
   }
 }
