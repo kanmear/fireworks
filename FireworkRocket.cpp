@@ -7,7 +7,7 @@ vector<FireworkRocket> FireworkHandler::fireworksVector = vector<FireworkRocket>
 
 FireworkRocket::FireworkRocket(
     CircleShape rocketShape_ = CircleShape(), 
-    float shapeRadius = 5.0f,
+    float shapeRadius = 2.0f,
     int amountOfStars_ = 32, 
     float vSpeed_ = 1.f,
     float hSpeed_ = 1.f) 
@@ -21,7 +21,7 @@ vSpeed(vSpeed_), hSpeed(hSpeed_) {
     vSpeed = sqrt(Utility::windowHeight) * (2.f / 3.f) + 1.f;
 
     rocketShape.setRadius(shapeRadius);
-    rocketShape.setFillColor(Color::Red);
+    rocketShape.setFillColor(Color::Yellow);
     rocketShape.setPosition(
         Utility::windowWidth / 2,
         Utility::windowHeight - (rocketShape.getRadius() * 2));

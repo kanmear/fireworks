@@ -31,6 +31,18 @@ void PhysicsHandler::handle() {
       if (vSpeed > 0.f) {
         vSpeed -= 0.3f / (vSpeed / 2.f);
       } 
+      
+      // rocket trail
+      if (rocket.alive) {
+        float mod1 = Utility::getRandomIntInRange(1, 2) == 1 ? 1.f : -1.f;
+        float mod2 = Utility::getRandomIntInRange(1, 2) == 1 ? 1.f : -1.f;
+        FireworkParticleHandler::launch(
+          shape.getPosition(), 
+          Utility::getRandomIntInRange(1, 10) / 50.f * mod1, 
+          Utility::getRandomIntInRange(1, 10) / 50.f * mod2,
+          Color::White,
+          4);
+      }
 
       // DebugHandler::addNewText("vSpeed" + to_string(i), to_string(vSpeed));
       //   + "window height " + to_string(Utility::windowHeight) + "\n";
@@ -48,12 +60,13 @@ void PhysicsHandler::handle() {
       // exploding rockets
       if (rocket.alive && 
       shape.getPosition().y <= 
-      Utility::windowHeight * (1.f / 3.f) + Utility::getRandomIntInRange(1, Utility::windowHeight / 10)) {
+      Utility::windowHeight * (1.f / 3.f) + Utility::getRandomIntInRange(1, Utility::windowHeight / 7)) {
         shape.setFillColor(Color::Transparent);
         rocket.alive = false;
         
         calculateParticlesMovement(rocket.amountOfStars, shape.getPosition(), Color::Magenta);
         calculateParticlesMovement(rocket.amountOfStars / 2, shape.getPosition(), Color::Cyan);
+        calculateParticlesMovement(rocket.amountOfStars / 3, shape.getPosition(), Color::Yellow);
       }
     }
 
@@ -68,16 +81,18 @@ void PhysicsHandler::handle() {
       vSpeed /= 1.005f;
       hSpeed /= 1.005f;
 
-      shape.setFillColor(Color(
-        shape.getFillColor().r,
-        shape.getFillColor().g,
-        shape.getFillColor().b,
-        shape.getFillColor().a == 0 ? 0 : shape.getFillColor().a - 1));
+      for (int n = 0; n < particle.fadeSpeed; n++) {
+        shape.setFillColor(Color(
+          shape.getFillColor().r,
+          shape.getFillColor().g,
+          shape.getFillColor().b,
+          shape.getFillColor().a == 0 ? 0 : shape.getFillColor().a - 1));
 
-      if (shape.getFillColor().a == 0) {
-        FireworkParticleHandler::particlesVector.erase(
-          FireworkParticleHandler::particlesVector.begin() + j
-        );
+        if (shape.getFillColor().a <= 0) {
+          FireworkParticleHandler::particlesVector.erase(
+            FireworkParticleHandler::particlesVector.begin() + j
+          );
+        }
       }
     }
 }

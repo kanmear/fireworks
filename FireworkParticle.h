@@ -11,12 +11,14 @@ class FireworkParticle {
 
         float vSpeed;
         float hSpeed;
+        int fadeSpeed;
 
         FireworkParticle(
             Vector2<float> position,
             float vSpeed_,
             float hSpeed_,
             Color color_,
+            int fadeSpeed_,
             CircleShape particleShape_
         );
 };
@@ -25,5 +27,5 @@ class FireworkParticleHandler {
     public:
         static vector<FireworkParticle> particlesVector;
 
-        static void launch(Vector2<float> position, float vSpeed_, float hSpeed_, Color color_);
+        static void launch(Vector2<float> position, float vSpeed_, float hSpeed_, Color color_, int fadeSpeed_ = 1);
 };
