@@ -1,8 +1,8 @@
 #pragma once
 #include "Utility.h"
+// #include "FireworkParticle.h"
 #include <SFML/Graphics/CircleShape.hpp>
 #include <vector>
-// #include "FireworkParticle.h"
 
 using namespace sf;
 using namespace std;
@@ -10,23 +10,19 @@ using namespace std;
 class FireworkRocket {
     public:
         CircleShape rocketShape;
-        // FireworkParticle particles[3];
 
+        // vector<FireworkParticle> particles;
         int amountOfStars;
 
         float vSpeed;
         float hSpeed;
-        float vAcceleration;
-        float hAcceleration;
-
-        float acceleration;
 
         FireworkRocket(
             CircleShape rocketShape_, 
             float shapeRadius_,
             int amountOfStars_, 
             float vSpeed_,
-            float hSpeed_) ;
+            float hSpeed_);
     
 };
 
