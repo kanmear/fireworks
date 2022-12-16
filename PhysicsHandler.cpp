@@ -23,9 +23,6 @@ void PhysicsHandler::handle() {
       float &hSpeed = rocket.hSpeed;
 
       if (vSpeed == 0.f) {
-        FireworkHandler::fireworksVector.erase(
-          FireworkHandler::fireworksVector.begin() + i
-        );
       }
 
       if (vSpeed > 0.f) {
@@ -33,16 +30,14 @@ void PhysicsHandler::handle() {
       } 
       
       // rocket trail
-      if (rocket.alive) {
-        float mod1 = Utility::getRandomIntInRange(1, 2) == 1 ? 1.f : -1.f;
-        float mod2 = Utility::getRandomIntInRange(1, 2) == 1 ? 1.f : -1.f;
-        FireworkParticleHandler::launch(
-          shape.getPosition(), 
-          Utility::getRandomIntInRange(1, 10) / 50.f * mod1, 
-          Utility::getRandomIntInRange(1, 10) / 50.f * mod2,
-          Color::White,
-          4);
-      }
+      float mod1 = Utility::getRandomIntInRange(1, 2) == 1 ? 1.f : -1.f;
+      float mod2 = Utility::getRandomIntInRange(1, 2) == 1 ? 1.f : -1.f;
+      FireworkParticleHandler::launch(
+        shape.getPosition(), 
+        Utility::getRandomIntInRange(1, 10) / 50.f * mod1, 
+        Utility::getRandomIntInRange(1, 10) / 50.f * mod2,
+        Color::White,
+        4);
 
       // DebugHandler::addNewText("vSpeed" + to_string(i), to_string(vSpeed));
       //   + "window height " + to_string(Utility::windowHeight) + "\n";
@@ -58,15 +53,16 @@ void PhysicsHandler::handle() {
       }
 
       // exploding rockets
-      if (rocket.alive && 
-      shape.getPosition().y <= 
+      if (shape.getPosition().y <= 
       Utility::windowHeight * (1.f / 3.f) + Utility::getRandomIntInRange(1, Utility::windowHeight / 7)) {
-        shape.setFillColor(Color::Transparent);
-        rocket.alive = false;
         
         calculateParticlesMovement(rocket.amountOfStars, shape.getPosition(), Color::Magenta);
         calculateParticlesMovement(rocket.amountOfStars / 2, shape.getPosition(), Color::Cyan);
         calculateParticlesMovement(rocket.amountOfStars / 3, shape.getPosition(), Color::Yellow);
+
+        FireworkHandler::fireworksVector.erase(
+          FireworkHandler::fireworksVector.begin() + i
+        );
       }
     }
 
