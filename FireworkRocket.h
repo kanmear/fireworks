@@ -10,6 +10,7 @@ using namespace std;
 class FireworkRocket {
     public:
         CircleShape rocketShape;
+        bool alive = true;
 
         // vector<FireworkParticle> particles;
         int amountOfStars;
@@ -22,8 +23,8 @@ class FireworkRocket {
             float shapeRadius_,
             int amountOfStars_, 
             float vSpeed_,
-            float hSpeed_);
-    
+            float hSpeed_
+        );
 };
 
 class FireworkHandler {

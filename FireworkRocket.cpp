@@ -8,7 +8,7 @@ vector<FireworkRocket> FireworkHandler::fireworksVector = vector<FireworkRocket>
 FireworkRocket::FireworkRocket(
     CircleShape rocketShape_ = CircleShape(), 
     float shapeRadius = 5.0f,
-    int amountOfStars_ = 5, 
+    int amountOfStars_ = 32, 
     float vSpeed_ = 1.f,
     float hSpeed_ = 1.f) 
 : rocketShape(rocketShape_), amountOfStars(amountOfStars_), 

@@ -7,7 +7,7 @@ using namespace std;
 
 class FireworkParticle {
     public:
-        CircleShape& particleShape;
+        CircleShape particleShape;
 
         float vSpeed;
         float hSpeed;

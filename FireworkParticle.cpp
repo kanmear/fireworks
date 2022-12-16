@@ -1,6 +1,9 @@
 #include "FireworkParticle.h"
+#include <iostream>
 
-vector<FireworkParticle> FireworkParticleHandler::particlesVector = vector <FireworkParticle>();
+using namespace std;
+
+vector<FireworkParticle> FireworkParticleHandler::particlesVector = vector<FireworkParticle>();
 
 FireworkParticle::FireworkParticle(
     Vector2<float> position,

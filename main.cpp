@@ -1,5 +1,6 @@
 #include "PhysicsHandler.h"
 #include "FireworkRocket.h"
+#include "FireworkParticle.h"
 #include "DebugHandler.h"
 #include "Utility.h"
 #include <SFML/Graphics.hpp>
@@ -41,12 +42,14 @@ int main() {
     window.clear();
     
     // draw debug info
-    DebugHandler::addNewText("amount of rockets", 
-      to_string(FireworkHandler::fireworksVector.size()));
     DebugHandler::addNewText("width", 
       to_string(Utility::windowWidth));
     DebugHandler::addNewText("height", 
       to_string(Utility::windowHeight));
+    DebugHandler::addNewText("amount of rockets", 
+      to_string(FireworkHandler::fireworksVector.size()));
+    DebugHandler::addNewText("amount of particles", 
+      to_string(FireworkParticleHandler::particlesVector.size()));
 
     drawDebug(window);
 
@@ -67,7 +70,12 @@ void drawDebug(RenderWindow &window) {
 };
 
 void drawRockets(RenderWindow &window) {
+  // draw rockets
   for (int i = 0; i < FireworkHandler::fireworksVector.size(); i++) {
     window.draw(FireworkHandler::fireworksVector[i].rocketShape);
+  }
+  // draw particles
+  for (int j = 0; j < FireworkParticleHandler::particlesVector.size(); j++) {
+    window.draw(FireworkParticleHandler::particlesVector[j].particleShape);
   }
 };
