@@ -12,6 +12,8 @@ using namespace std;
 
 float PhysicsHandler::gravity = 9.8f;
 
+void calculateParticlesMovement(int amountOfParticles, Vector2<float> position, Color color); 
+
 void PhysicsHandler::handle() {
     for (int i = 0; i < FireworkHandler::fireworksVector.size(); i++) {
       // moving and deleting rockets
@@ -49,29 +51,7 @@ void PhysicsHandler::handle() {
         shape.setFillColor(Color::Transparent);
         rocket.alive = false;
         
-        const float d1 = 1.f;
-        float d = 1.f;
-        float step = 1.f / rocket.amountOfStars * 4.f;
-        for (int j = 0; j < rocket.amountOfStars; j++) {
-          float pVspeed = d;
-          float pHspeed = j % 2 != 0
-            ? 1 - abs(d)
-            : -(1 - abs(d));
-          if (j % 2 == 0)
-            d -= step;
-          
-          while (floor(pow(abs(pVspeed), 2.f) + pow(abs(pHspeed), 2.f)) < pow(d1, 2.f)) {
-            // cout << to_string(pVspeed) + ", " + to_string(pHspeed) + "\n";
-            if (pVspeed != 0)
-              pVspeed += pVspeed > 0 ? 0.05f : -0.05f;            
-            if (pHspeed != 0)
-              pHspeed += pHspeed > 0 ? 0.05f : -0.05f;            
-          }
-
-          FireworkParticleHandler::launch(
-            Vector2<float>(shape.getPosition().x, shape.getPosition().y),
-            pVspeed, pHspeed);
-        }
+        calculateParticlesMovement(rocket.amountOfStars, shape.getPosition(), Color::Magenta);
       }
     }
 
@@ -79,10 +59,13 @@ void PhysicsHandler::handle() {
       // moving and deleting particles
       FireworkParticle &particle = FireworkParticleHandler::particlesVector[j];
       CircleShape &shape = particle.particleShape;
-      float vSpeed = particle.vSpeed;
-      float hSpeed = particle.hSpeed;
+      float &vSpeed = particle.vSpeed;
+      float &hSpeed = particle.hSpeed;
 
-      shape.move(vSpeed, hSpeed);
+      shape.move(hSpeed, vSpeed);
+      vSpeed /= 1.005f;
+      hSpeed /= 1.005f;
+
       shape.setFillColor(Color(
         shape.getFillColor().r,
         shape.getFillColor().g,
@@ -95,4 +78,26 @@ void PhysicsHandler::handle() {
         );
       }
     }
+}
+
+void calculateParticlesMovement(int amountOfParticles, Vector2<float> position, Color color) {
+  const float d1 = 1.f;
+  float d = 1.f;
+  float step = 1.f / amountOfParticles * 4.f;
+  for (int j = 0; j < amountOfParticles; j++) {
+    float pVspeed = d;
+    float pHspeed = j % 2 != 0
+      ? 1 - abs(d)
+      : -(1 - abs(d));
+    if (j % 2 == 0)
+      d -= step;
+    
+    while (floor(pow(abs(pVspeed), 2.f) + pow(abs(pHspeed), 2.f)) < pow(d1, 2.f)) {
+      // TODO test performance of this loop
+      pVspeed += pVspeed > 0 ? 0.05f : -0.05f;            
+      pHspeed += pHspeed > 0 ? 0.05f : -0.05f;            
+    }
+
+    FireworkParticleHandler::launch(position, pVspeed, pHspeed, color);
+  }
 }
