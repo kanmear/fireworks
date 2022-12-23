@@ -103,26 +103,16 @@ void PhysicsHandler::handle() {
 }
 
 void calculateParticlesMovement(int amountOfParticles, Vector2<float> position, Color color, float distanceModifier) {
-  const float d1 = 1.f;
-  float d = 1.f;
-  float step = 1.f / amountOfParticles * 4.f;
+  const float r = 1.f;
+  float step = 360 / amountOfParticles;
   for (int j = 0; j < amountOfParticles; j++) {
-    float pVspeed = d;
-    float pHspeed = j % 2 != 0
-      ? 1 - abs(d)
-      : -(1 - abs(d));
-    if (j % 2 == 0)
-      d -= step;
-    
-    while (floor(pow(abs(pVspeed), 2.f) + pow(abs(pHspeed), 2.f)) < pow(d1, 2.f)) {
-      // TODO test performance of this loop
-      pVspeed += pVspeed > 0 ? 0.05f : -0.05f;            
-      pHspeed += pHspeed > 0 ? 0.05f : -0.05f;            
-    }
+    float x = r * cos(M_PI * 2 * (360 - step * j) / 360);
+    float y = r * sin(M_PI * 2 * (360 - step * j) / 360);
 
     FireworkParticleHandler::launch(position, 
-      pVspeed * distanceModifier, 
-      pHspeed * distanceModifier, color,
+      x * distanceModifier, 
+      y * distanceModifier, 
+      color,
       distanceModifier == 1.f 
         ? 1
         : pow(distanceModifier, -1) / 2);
