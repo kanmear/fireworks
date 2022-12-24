@@ -37,7 +37,8 @@ void PhysicsHandler::handle() {
         Utility::getRandomIntInRange(1, 10) / 50.f * mod1, 
         Utility::getRandomIntInRange(1, 10) / 50.f * mod2,
         Color::White,
-        4);
+        4,
+        false);
 
       // DebugHandler::addNewText("vSpeed" + to_string(i), to_string(vSpeed));
       //   + "window height " + to_string(Utility::windowHeight) + "\n";
@@ -74,7 +75,7 @@ void PhysicsHandler::handle() {
         );
       }
     }
-
+    
     for (int j = 0; j < FireworkParticleHandler::particlesVector.size(); j++) {
       // moving and deleting particles
       FireworkParticle &particle = FireworkParticleHandler::particlesVector[j];
@@ -86,14 +87,18 @@ void PhysicsHandler::handle() {
       vSpeed /= 1.005f;
       hSpeed /= 1.005f;
 
-      for (int n = 0; n < particle.fadeSpeed; n++) {
-        if (shape.getFillColor().a > 0) {
-          shape.setFillColor(Color(
-            shape.getFillColor().r,
-            shape.getFillColor().g,
-            shape.getFillColor().b,
-            shape.getFillColor().a == 0 ? 0 : shape.getFillColor().a - 1));
-        }
+      if (shape.getFillColor().a - particle.fadeSpeed > 0) {
+        shape.setFillColor(Color(
+          shape.getFillColor().r,
+          shape.getFillColor().g,
+          shape.getFillColor().b,
+          shape.getFillColor().a - particle.fadeSpeed));
+      } else {
+        shape.setFillColor(Color(
+          shape.getFillColor().r,
+          shape.getFillColor().g,
+          shape.getFillColor().b,
+          0));
       }
 
       if (shape.getFillColor().a <= 0) {
