@@ -87,17 +87,19 @@ void PhysicsHandler::handle() {
       hSpeed /= 1.005f;
 
       for (int n = 0; n < particle.fadeSpeed; n++) {
-        shape.setFillColor(Color(
-          shape.getFillColor().r,
-          shape.getFillColor().g,
-          shape.getFillColor().b,
-          shape.getFillColor().a == 0 ? 0 : shape.getFillColor().a - 1));
-
-        if (shape.getFillColor().a <= 0) {
-          FireworkParticleHandler::particlesVector.erase(
-            FireworkParticleHandler::particlesVector.begin() + j
-          );
+        if (shape.getFillColor().a > 0) {
+          shape.setFillColor(Color(
+            shape.getFillColor().r,
+            shape.getFillColor().g,
+            shape.getFillColor().b,
+            shape.getFillColor().a == 0 ? 0 : shape.getFillColor().a - 1));
         }
+      }
+
+      if (shape.getFillColor().a <= 0) {
+        FireworkParticleHandler::particlesVector.erase(
+          FireworkParticleHandler::particlesVector.begin() + j
+        );
       }
     }
 }
