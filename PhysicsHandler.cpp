@@ -57,8 +57,15 @@ void PhysicsHandler::handle() {
       if (shape.getPosition().y <= 
       Utility::windowHeight * (1.f / 3.f) + Utility::getRandomIntInRange(1, Utility::windowHeight / 7)) {
         
+        Color rColor = Utility::getRandomColor();
         calculateParticlesMovement(rocket.amountOfStars, shape.getPosition(), 
-          Utility::getRandomColor());
+          rColor);
+        calculateParticlesMovement(rocket.amountOfStars, shape.getPosition(), 
+          rColor, 1 / 1.1f);
+        calculateParticlesMovement(rocket.amountOfStars, shape.getPosition(), 
+          rColor, 1 / 1.2f);
+        calculateParticlesMovement(rocket.amountOfStars, shape.getPosition(), 
+          rColor, 1 / 1.3f);
         calculateParticlesMovement(rocket.amountOfStars / 2, shape.getPosition(), 
           Utility::getRandomColor());
         // calculateParticlesMovement(rocket.amountOfStars / 2, shape.getPosition(), 
@@ -147,6 +154,7 @@ void calculateParticlesMovement(int amountOfParticles, Vector2<float> position, 
       color,
       distanceModifier == 1.f 
         ? 1
-        : pow(distanceModifier, -1) / 2);
+        : 1);
+        // : pow(distanceModifier, -1) / 2);
   }
 }
