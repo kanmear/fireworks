@@ -22,11 +22,8 @@ void PhysicsHandler::handle() {
       float &vSpeed = rocket.vSpeed;
       float &hSpeed = rocket.hSpeed;
 
-      if (vSpeed == 0.f) {
-      }
-
       if (vSpeed > 0.f) {
-        vSpeed -= 0.3f / (vSpeed / 2.f);
+        vSpeed -= 0.6f / vSpeed;
       } 
       
       // rocket trail
@@ -40,18 +37,9 @@ void PhysicsHandler::handle() {
         4,
         false);
 
-      // DebugHandler::addNewText("vSpeed" + to_string(i), to_string(vSpeed));
-      //   + "window height " + to_string(Utility::windowHeight) + "\n";
-      // DebugHandler::addNewText("hSpeed" + to_string(i), to_string(hSpeed));
-      //   + "window width " + to_string(Utility::windowWidth) + "\n";
       if (shape.getPosition().y + (shape.getRadius() * 2) <= Utility::windowHeight) {
         shape.move(hSpeed, -vSpeed + gravity);
-      } else {
-        shape.setPosition(
-          shape.getPosition().x,
-          Utility::windowHeight - (shape.getRadius() * 2) + 1.f);
-        vSpeed = 0.f;
-      }
+      } 
 
       // exploding rockets
       if (shape.getPosition().y <= 
@@ -68,8 +56,6 @@ void PhysicsHandler::handle() {
           rColor, 1 / 1.3f);
         calculateParticlesMovement(rocket.amountOfStars / 2, shape.getPosition(), 
           Utility::getRandomColor());
-        // calculateParticlesMovement(rocket.amountOfStars / 2, shape.getPosition(), 
-        //   Utility::getRandomColor(), 1 / 10.f);
         calculateParticlesMovement(rocket.amountOfStars / 2, shape.getPosition(), 
           Utility::getRandomColor(), 1 / 6.f);
         calculateParticlesMovement(rocket.amountOfStars / 3, shape.getPosition(),
@@ -151,10 +137,6 @@ void calculateParticlesMovement(int amountOfParticles, Vector2<float> position, 
     FireworkParticleHandler::launch(position, 
       x * distanceModifier, 
       y * distanceModifier, 
-      color,
-      distanceModifier == 1.f 
-        ? 1
-        : 1);
-        // : pow(distanceModifier, -1) / 2);
+      color);
   }
 }
