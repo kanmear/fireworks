@@ -1,5 +1,4 @@
 #include "Utility.h"
-#include <random>
 
 using namespace sf;
 using namespace std;
@@ -10,12 +9,12 @@ int Utility::windowWidth = 0;
 Clock Utility::clock = Clock();
 Time Utility::previousTimeValue = clock.getElapsedTime();
 
-int Utility::getRandomIntInRange(int i, int j) {
-    random_device randomDevice;
-    mt19937 generator(randomDevice());
-    uniform_int_distribution<> distr(i, j);
+random_device Utility::randomDevice;
+mt19937 Utility::generator = mt19937(randomDevice());
 
-    return distr(generator);
+int Utility::getRandomIntInRange(int i, int j) {
+    uniform_int_distribution<> distribution(i, j);
+    return distribution(generator);
 };
 
 int Utility::calculateFPS() {
