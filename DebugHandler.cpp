@@ -1,6 +1,4 @@
 #include "DebugHandler.h"
-#include <SFML/Graphics.hpp>
-#include <vector>
 #include <string>
 
 using namespace std;

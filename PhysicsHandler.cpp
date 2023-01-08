@@ -1,9 +1,7 @@
 #include "PhysicsHandler.h"
-#include "FireworkRocket.h"
 #include "FireworkParticle.h"
 #include "DebugHandler.h"
 #include <SFML/Graphics/CircleShape.hpp>
-#include <SFML/Graphics/RenderWindow.hpp>
 #include <iostream>
 #include <cmath>
 
