@@ -42,9 +42,7 @@ void PhysicsHandler::handle() {
       } 
 
       // exploding rockets
-      if (shape.getPosition().y <= 
-      Utility::windowHeight * (1.f / 3.f) + Utility::getRandomIntInRange(1, Utility::windowHeight / 7)) {
-        
+      if (shape.getPosition().y <= rocket.explosionPositionY) {
         Color rColor = Utility::getRandomColor();
         calculateParticlesMovement(rocket.amountOfStars, shape.getPosition(), 
           rColor);
@@ -96,6 +94,7 @@ void PhysicsHandler::handle() {
 
     for (int j = 0; j < FireworkParticleHandler::particlesVector.size(); j++) {
       // moving and deleting particles
+      // TODO try to send them with random timeouts or something
       FireworkParticle &particle = FireworkParticleHandler::particlesVector[j];
       CircleShape &shape = particle.particleShape;
       float &vSpeed = particle.vSpeed;

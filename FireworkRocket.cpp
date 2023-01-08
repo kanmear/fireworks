@@ -25,6 +25,8 @@ vSpeed(vSpeed_), hSpeed(hSpeed_) {
     rocketShape.setPosition(
         Utility::windowWidth / 2,
         Utility::windowHeight - (rocketShape.getRadius() * 2));
+    
+    explosionPositionY = Utility::windowHeight * (1.f / 3.f) + Utility::getRandomIntInRange(1, Utility::windowHeight / 7);
 }
 
 void FireworkHandler::launch() {

@@ -1,6 +1,5 @@
 #pragma once
 #include "Utility.h"
-// #include "FireworkParticle.h"
 #include <SFML/Graphics/CircleShape.hpp>
 #include <vector>
 
@@ -11,11 +10,11 @@ class FireworkRocket {
     public:
         CircleShape rocketShape;
 
-        // vector<FireworkParticle> particles;
         int amountOfStars;
 
         float vSpeed;
         float hSpeed;
+        float explosionPositionY;
 
         FireworkRocket(
             CircleShape rocketShape_, 
