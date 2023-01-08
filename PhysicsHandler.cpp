@@ -66,35 +66,9 @@ void PhysicsHandler::handle() {
         );
       }
     }
-    
-    // particle trail
-    // for (int j = 0; j < FireworkParticleHandler::particlesVector.size(); j++) {
-    //   FireworkParticle &particle = FireworkParticleHandler::particlesVector[j];
-    //   CircleShape &shape = particle.particleShape;
-      
-    //   if (particle.genuine) {
-    //     int rand = Utility::getRandomIntInRange(1, 3);
-    //     if (rand == 1) {
-    //       float mod1 = Utility::getRandomIntInRange(1, 2) == 1 ? 1.f : -1.f;
-    //       float mod2 = Utility::getRandomIntInRange(1, 2) == 1 ? 1.f : -1.f;
-    //       FireworkParticleHandler::launch(
-    //         shape.getPosition(), 
-    //         Utility::getRandomIntInRange(1, 10) / 200.f * mod1, 
-    //         Utility::getRandomIntInRange(1, 10) / 200.f * mod2,
-    //         Color(
-    //           shape.getFillColor().r,
-    //           shape.getFillColor().g,
-    //           shape.getFillColor().b,
-    //           122),
-    //         2,
-    //         false);
-    //     }
-    //   }
-    // }
 
     for (int j = 0; j < FireworkParticleHandler::particlesVector.size(); j++) {
       // moving and deleting particles
-      // TODO try to send them with random timeouts or something
       FireworkParticle &particle = FireworkParticleHandler::particlesVector[j];
       CircleShape &shape = particle.particleShape;
       float &vSpeed = particle.vSpeed;
