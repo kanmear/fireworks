@@ -73,11 +73,18 @@ void drawDebug(RenderWindow &window) {
 
 void drawRockets(RenderWindow &window) {
   // draw rockets
+  VertexArray vertexes = VertexArray();
   for (int i = 0; i < FireworkHandler::fireworksVector.size(); i++) {
-    window.draw(FireworkHandler::fireworksVector[i].rocketShape);
+    CircleShape shape = FireworkHandler::fireworksVector[i].rocketShape;
+    vertexes.append(Vertex(shape.getPosition()));
+    // window.draw(FireworkHandler::fireworksVector[i].rocketShape);
   }
   // draw particles
   for (int j = 0; j < FireworkParticleHandler::particlesVector.size(); j++) {
-    window.draw(FireworkParticleHandler::particlesVector[j].particleShape);
+    CircleShape shape = FireworkParticleHandler::particlesVector[j].particleShape;
+    vertexes.append(Vertex(shape.getPosition()));
+    // window.draw(FireworkParticleHandler::particlesVector[j].particleShape);
   }
+  
+  window.draw(vertexes);
 };
