@@ -4,13 +4,17 @@
 #include <SFML/Graphics/CircleShape.hpp>
 #include <iostream>
 #include <cmath>
+#include <thread>
+#include <chrono>
 
 using namespace sf;
 using namespace std;
 
 float PhysicsHandler::gravity = 9.8f;
+vector<future<void>> PhysicsHandler::futures = vector<future<void>>();
 
 void calculateParticlesMovement(int amountOfParticles, Vector2<float> position, Color color, float distanceModifier = 1.f); 
+void launchParticle(Vector2<float> position, float x, float y, Color color); 
 
 void PhysicsHandler::handle() {
     for (int i = 0; i < FireworkHandler::fireworksVector.size(); i++) {
@@ -44,20 +48,20 @@ void PhysicsHandler::handle() {
         Color rColor = Utility::getRandomColor();
         calculateParticlesMovement(rocket.amountOfStars, shape.getPosition(), 
           rColor);
-        calculateParticlesMovement(rocket.amountOfStars, shape.getPosition(), 
-          rColor, 1 / 1.1f);
-        calculateParticlesMovement(rocket.amountOfStars, shape.getPosition(), 
-          rColor, 1 / 1.2f);
-        calculateParticlesMovement(rocket.amountOfStars, shape.getPosition(), 
-          rColor, 1 / 1.3f);
+        // calculateParticlesMovement(rocket.amountOfStars, shape.getPosition(), 
+        //   rColor, 1 / 1.1f);
+        // calculateParticlesMovement(rocket.amountOfStars, shape.getPosition(), 
+        //   rColor, 1 / 1.2f);
+        // calculateParticlesMovement(rocket.amountOfStars, shape.getPosition(), 
+        //   rColor, 1 / 1.3f);
         // calculateParticlesMovement(rocket.amountOfStars / 2, shape.getPosition(), 
         //   Utility::getRandomColor());
-        calculateParticlesMovement(rocket.amountOfStars / 2, shape.getPosition(), 
-          Utility::getRandomColor(), 1 / 6.f);
+        // calculateParticlesMovement(rocket.amountOfStars / 2, shape.getPosition(), 
+        //   Utility::getRandomColor(), 1 / 6.f);
         // calculateParticlesMovement(rocket.amountOfStars / 3, shape.getPosition(),
         //   Utility::getRandomColor());
-        calculateParticlesMovement(rocket.amountOfStars / 3, shape.getPosition(), 
-          Utility::getRandomColor(), 1 / 8.f);
+        // calculateParticlesMovement(rocket.amountOfStars / 3, shape.getPosition(), 
+        //   Utility::getRandomColor(), 1 / 8.f);
 
         FireworkHandler::fireworksVector.erase(
           FireworkHandler::fireworksVector.begin() + i
@@ -72,7 +76,7 @@ void PhysicsHandler::handle() {
         Vertex &vertex = particle.particleVertex;
 
         if (particle.genuine) {
-          int rand = Utility::getRandomIntInRange(1, 5);
+          int rand = Utility::getRandomIntInRange(1, 1);
           if (rand == 1) {
             float mod1 = Utility::getRandomIntInRange(1, 2) == 1 ? 1.f : -1.f;
             float mod2 = Utility::getRandomIntInRange(1, 2) == 1 ? 1.f : -1.f;
@@ -124,9 +128,19 @@ void calculateParticlesMovement(int amountOfParticles, Vector2<float> position, 
     float x = r * cos(M_PI * 2 * (360 - step * j) / 360);
     float y = r * sin(M_PI * 2 * (360 - step * j) / 360);
 
-    FireworkParticleHandler::launch(position, 
-      x * distanceModifier, 
-      y * distanceModifier, 
-      color);
+    PhysicsHandler::futures.push_back(
+      async(launch::async, launchParticle, position, x * distanceModifier, y * distanceModifier, color));
   }
+}
+
+void launchParticle(Vector2f position, float x, float y, Color color) {
+  int modifier = Utility::getRandomIntInRange(0, 3);
+  this_thread::sleep_for(std::chrono::milliseconds(
+    modifier * 50
+  ));
+
+  FireworkParticleHandler::launch(position, 
+    x, 
+    y, 
+    color);
 }
