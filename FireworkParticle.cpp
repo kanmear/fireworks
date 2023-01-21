@@ -12,11 +12,10 @@ FireworkParticle::FireworkParticle(
     Color color_ = Color::Magenta,
     int fadeSpeed_ = 1,
     bool genuine_ = true,
-    CircleShape particleShape_ = CircleShape())
-: particleShape(particleShape_), vSpeed(vSpeed_), hSpeed(hSpeed_), fadeSpeed(fadeSpeed_), genuine(genuine_) {
-    particleShape.setPosition(position.x, position.y);
-    particleShape.setRadius(1.f);
-    particleShape.setFillColor(color_);
+    Vertex particleVertex_ = Vertex())
+: particleVertex(particleVertex_), vSpeed(vSpeed_), hSpeed(hSpeed_), fadeSpeed(fadeSpeed_), genuine(genuine_) {
+    particleVertex.position = position;
+    particleVertex.color = color_;
 }
 
 void FireworkParticleHandler::launch(Vector2<float> position, float vSpeed_, float hSpeed_, Color color_, int fadeSpeed_, bool genuine_) {

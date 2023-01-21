@@ -50,12 +50,12 @@ void PhysicsHandler::handle() {
           rColor, 1 / 1.2f);
         calculateParticlesMovement(rocket.amountOfStars, shape.getPosition(), 
           rColor, 1 / 1.3f);
-        calculateParticlesMovement(rocket.amountOfStars / 2, shape.getPosition(), 
-          Utility::getRandomColor());
+        // calculateParticlesMovement(rocket.amountOfStars / 2, shape.getPosition(), 
+        //   Utility::getRandomColor());
         calculateParticlesMovement(rocket.amountOfStars / 2, shape.getPosition(), 
           Utility::getRandomColor(), 1 / 6.f);
-        calculateParticlesMovement(rocket.amountOfStars / 3, shape.getPosition(),
-          Utility::getRandomColor());
+        // calculateParticlesMovement(rocket.amountOfStars / 3, shape.getPosition(),
+        //   Utility::getRandomColor());
         calculateParticlesMovement(rocket.amountOfStars / 3, shape.getPosition(), 
           Utility::getRandomColor(), 1 / 8.f);
 
@@ -65,32 +65,51 @@ void PhysicsHandler::handle() {
       }
     }
 
+    // particle trail
+    if (true) {
+      for (int j = 0; j < FireworkParticleHandler::particlesVector.size(); j++) {
+        FireworkParticle &particle = FireworkParticleHandler::particlesVector[j];
+        Vertex &vertex = particle.particleVertex;
+
+        if (particle.genuine) {
+          int rand = Utility::getRandomIntInRange(1, 5);
+          if (rand == 1) {
+            float mod1 = Utility::getRandomIntInRange(1, 2) == 1 ? 1.f : -1.f;
+            float mod2 = Utility::getRandomIntInRange(1, 2) == 1 ? 1.f : -1.f;
+            FireworkParticleHandler::launch(
+              vertex.position, 
+              Utility::getRandomIntInRange(1, 10) / 200.f * mod1, 
+              Utility::getRandomIntInRange(1, 10) / 200.f * mod2,
+              Color(
+                vertex.color.r,
+                vertex.color.g,
+                vertex.color.b,
+                122),
+              2,
+              false);
+          }
+        }
+      }
+    }
+
     for (int j = 0; j < FireworkParticleHandler::particlesVector.size(); j++) {
       // moving and deleting particles
       FireworkParticle &particle = FireworkParticleHandler::particlesVector[j];
-      CircleShape &shape = particle.particleShape;
+      Vertex &vertex = particle.particleVertex;
       float &vSpeed = particle.vSpeed;
       float &hSpeed = particle.hSpeed;
 
-      shape.move(hSpeed, vSpeed);
+      vertex.position = Vector2f(vertex.position.x + hSpeed, vertex.position.y + vSpeed);
       vSpeed /= 1.005f;
       hSpeed /= 1.005f;
 
-      if (shape.getFillColor().a - particle.fadeSpeed > 0) {
-        shape.setFillColor(Color(
-          shape.getFillColor().r,
-          shape.getFillColor().g,
-          shape.getFillColor().b,
-          shape.getFillColor().a - particle.fadeSpeed));
+      if (vertex.color.a - particle.fadeSpeed > 0) {
+        vertex.color.a -= particle.fadeSpeed;
       } else {
-        shape.setFillColor(Color(
-          shape.getFillColor().r,
-          shape.getFillColor().g,
-          shape.getFillColor().b,
-          0));
+        vertex.color.a = 0;
       }
 
-      if (shape.getFillColor().a <= 0) {
+      if (vertex.color.a <= 0) {
         FireworkParticleHandler::particlesVector.erase(
           FireworkParticleHandler::particlesVector.begin() + j
         );
