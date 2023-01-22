@@ -8,7 +8,7 @@ vector<FireworkRocket> FireworkHandler::fireworksVector = vector<FireworkRocket>
 FireworkRocket::FireworkRocket(
     CircleShape rocketShape_ = CircleShape(), 
     float shapeRadius = 2.0f,
-    int amountOfStars_ = 30, 
+    int amountOfStars_ = 60, 
     float vSpeed_ = 1.f,
     float hSpeed_ = 1.f) 
 : rocketShape(rocketShape_), amountOfStars(amountOfStars_), 
@@ -16,7 +16,8 @@ vSpeed(vSpeed_), hSpeed(hSpeed_) {
     int modifier = Utility::getRandomIntInRange(1, 2) == 1
             ? -1
             : 1;
-    hSpeed = Utility::getRandomIntInRange(1, 15) / 10.f * modifier;
+    // TODO replace hardcoded values with enum variables
+    hSpeed = Utility::getRandomIntInRange(1, 45) / 10.f * modifier;
 
     vSpeed = sqrt(Utility::windowHeight) * (2.f / 3.f) + 1.f;
 
