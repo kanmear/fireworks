@@ -119,6 +119,10 @@ void PhysicsHandler::handle() {
         );
       }
     }
+    
+    if (FireworkParticleHandler::particlesVector.size() == 0) {
+      PhysicsHandler::futures.clear();
+    }
 }
 
 void calculateParticlesMovement(int amountOfParticles, Vector2<float> position, Color color, bool isRandomSpread, float distanceModifier) {
