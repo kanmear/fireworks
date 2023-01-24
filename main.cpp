@@ -11,16 +11,18 @@
 using namespace std;
 using namespace sf;
 
-RenderWindow& createWindow();
+void configureWindow(RenderWindow &window);
 void mainLoop(RenderWindow &window);
 void handleEvents(RenderWindow &window, Event event);
 void launchRocketsAutomatically();
+void updateWindow(RenderWindow &window);
 void drawDebug(RenderWindow &window);
 void drawRockets(RenderWindow &window);
 
 int main() {
     // TODO replace hardcoded values with enum variables
-  RenderWindow &window = createWindow();
+  RenderWindow window(VideoMode(200, 200), "fireworks");
+  configureWindow(window);
   DebugHandler::setFont();
 
   while (window.isOpen()) {
@@ -30,13 +32,11 @@ int main() {
   return 1;
 };
 
-RenderWindow& createWindow() {
-  RenderWindow window(VideoMode(200, 200), "fireworks");
+void configureWindow(RenderWindow &window) {
   Utility::windowHeight = window.getSize().y;
   Utility::windowWidth = window.getSize().x;
   window.setFramerateLimit(120);
   window.setKeyRepeatEnabled(false);
-  return window;
 };
 
 void mainLoop(RenderWindow &window) {
