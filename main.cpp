@@ -39,13 +39,17 @@ int main() {
       }
     }
 
+    if (Utility::getRandomIntInRange(1, 300) == 1) {
+        FireworkHandler::launch();
+    }
+
     window.clear();
     
     // draw debug info
-    DebugHandler::addNewText("fps", 
-      to_string(Utility::calculateFPS()));
-    DebugHandler::addNewText("amount of particles", 
-      to_string(FireworkParticleHandler::particlesVector.size()));
+    // DebugHandler::addNewText("fps", 
+    //   to_string(Utility::calculateFPS()));
+    // DebugHandler::addNewText("amount of particles", 
+    //   to_string(FireworkParticleHandler::particlesVector.size()));
 
     drawDebug(window);
 
@@ -69,8 +73,8 @@ void drawRockets(RenderWindow &window) {
   // draw rockets
   VertexArray vertexes = VertexArray();
   for (int i = 0; i < FireworkHandler::fireworksVector.size(); i++) {
-    CircleShape shape = FireworkHandler::fireworksVector[i].rocketShape;
-    vertexes.append(Vertex(shape.getPosition(), shape.getFillColor()));
+    Vertex vertex = FireworkHandler::fireworksVector[i].vertex;
+    vertexes.append(vertex);
   }
 
   // draw particles

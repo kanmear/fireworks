@@ -6,12 +6,11 @@ using namespace std;
 vector<FireworkRocket> FireworkHandler::fireworksVector = vector<FireworkRocket>();
 
 FireworkRocket::FireworkRocket(
-    CircleShape rocketShape_ = CircleShape(), 
-    float shapeRadius = 2.0f,
     int amountOfStars_ = 60, 
     float vSpeed_ = 1.f,
-    float hSpeed_ = 1.f) 
-: rocketShape(rocketShape_), amountOfStars(amountOfStars_), 
+    float hSpeed_ = 1.f,
+    Vertex vertex_ = Vertex()) 
+: vertex(vertex_), amountOfStars(amountOfStars_), 
 vSpeed(vSpeed_), hSpeed(hSpeed_) { 
     int modifier = Utility::getRandomIntInRange(1, 2) == 1
             ? -1
@@ -21,11 +20,10 @@ vSpeed(vSpeed_), hSpeed(hSpeed_) {
 
     vSpeed = sqrt(Utility::windowHeight) * (2.f / 3.f) + 1.f;
 
-    rocketShape.setRadius(shapeRadius);
-    rocketShape.setFillColor(Color::Yellow);
-    rocketShape.setPosition(
+    vertex.color = Color::Yellow;
+    vertex.position = Vector2f(
         Utility::windowWidth / 2,
-        Utility::windowHeight - (rocketShape.getRadius() * 2));
+        Utility::windowHeight);
     
     explosionPositionY = Utility::windowHeight * (1.f / 3.f) + Utility::getRandomIntInRange(1, Utility::windowHeight / 7);
 }

@@ -21,7 +21,7 @@ void PhysicsHandler::handle() {
     for (int i = 0; i < FireworkHandler::fireworksVector.size(); i++) {
       // moving and deleting rockets
       FireworkRocket &rocket = FireworkHandler::fireworksVector[i];
-      CircleShape &shape = rocket.rocketShape;
+      Vertex &vertex = rocket.vertex;
       float &vSpeed = rocket.vSpeed;
       float &hSpeed = rocket.hSpeed;
 
@@ -33,34 +33,36 @@ void PhysicsHandler::handle() {
       float mod1 = Utility::getRandomIntInRange(1, 2) == 1 ? 1.f : -1.f;
       float mod2 = Utility::getRandomIntInRange(1, 2) == 1 ? 1.f : -1.f;
       FireworkParticleHandler::launch(
-        shape.getPosition(), 
+        vertex.position,
         Utility::getRandomIntInRange(1, 10) / 50.f * mod1, 
         Utility::getRandomIntInRange(1, 10) / 50.f * mod2,
         Color::White,
         4,
         false);
 
-      if (shape.getPosition().y + (shape.getRadius() * 2) <= Utility::windowHeight) {
-        shape.move(hSpeed, -vSpeed + gravity);
+      if (vertex.position.y <= Utility::windowHeight) {
+        vertex.position = Vector2f(
+          vertex.position.x + hSpeed, 
+          vertex.position.y - vSpeed + gravity);
       } 
 
       // exploding rockets
-      if (shape.getPosition().y <= rocket.explosionPositionY) {
+      if (vertex.position.y <= rocket.explosionPositionY) {
         Color rColor1 = Utility::getRandomColor();
         Color rColor2 = Utility::getRandomColor();
         Color rColor3 = Utility::getRandomColor();
         Color rColor4 = Utility::getRandomColor();
-        calculateParticlesMovement(rocket.amountOfStars / 2, shape.getPosition(), 
+        calculateParticlesMovement(rocket.amountOfStars / 2, vertex.position, 
           rColor1, false, 1 / 1.2f);
-        calculateParticlesMovement(rocket.amountOfStars / 3, shape.getPosition(), 
+        calculateParticlesMovement(rocket.amountOfStars / 3, vertex.position, 
           rColor1, true, 1 / 1.3f);
-        calculateParticlesMovement(rocket.amountOfStars / 3, shape.getPosition(), 
+        calculateParticlesMovement(rocket.amountOfStars / 3, vertex.position, 
           rColor1, true, 1 / 1.6f);
-        calculateParticlesMovement(rocket.amountOfStars / 3, shape.getPosition(), 
+        calculateParticlesMovement(rocket.amountOfStars / 3, vertex.position, 
           rColor1, true, 1 / 1.9f);
-        calculateParticlesMovement(rocket.amountOfStars / 3, shape.getPosition(), 
+        calculateParticlesMovement(rocket.amountOfStars / 3, vertex.position, 
           rColor2, true, 1 / 3.1f);
-        calculateParticlesMovement(rocket.amountOfStars / 3, shape.getPosition(), 
+        calculateParticlesMovement(rocket.amountOfStars / 3, vertex.position, 
           rColor3, true, 1 / 4.6f);
 
         FireworkHandler::fireworksVector.erase(

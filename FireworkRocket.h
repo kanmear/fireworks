@@ -8,7 +8,7 @@ using namespace std;
 
 class FireworkRocket {
     public:
-        CircleShape rocketShape;
+        Vertex vertex;
 
         int amountOfStars;
 
@@ -17,11 +17,10 @@ class FireworkRocket {
         float explosionPositionY;
 
         FireworkRocket(
-            CircleShape rocketShape_, 
-            float shapeRadius_,
             int amountOfStars_, 
             float vSpeed_,
-            float hSpeed_
+            float hSpeed_,
+            Vertex vertex_ 
         );
 };
 
