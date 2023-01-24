@@ -15,7 +15,6 @@ vSpeed(vSpeed_), hSpeed(hSpeed_) {
     int modifier = Utility::getRandomIntInRange(1, 2) == 1
             ? -1
             : 1;
-    // TODO replace hardcoded values with enum variables
     hSpeed = Utility::getRandomIntInRange(1, 45) / 10.f * modifier;
 
     vSpeed = sqrt(Utility::windowHeight) * (2.f / 3.f) + 1.f;
