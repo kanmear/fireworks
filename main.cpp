@@ -79,7 +79,7 @@ void drawRockets(RenderWindow &window) {
 
   // draw particles
   for (int j = 0; j < FireworkParticleHandler::particlesVector.size(); j++) {
-    Vertex vertex = FireworkParticleHandler::particlesVector[j].particleVertex;
+    Vertex vertex = FireworkParticleHandler::particlesVector[j].vertex;
     vertexes.append(vertex);
   }
   

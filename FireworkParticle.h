@@ -7,7 +7,7 @@ using namespace std;
 
 class FireworkParticle {
     public:
-        Vertex particleVertex;
+        Vertex vertex;
 
         float vSpeed;
         float hSpeed;
@@ -21,7 +21,7 @@ class FireworkParticle {
             Color color_,
             int fadeSpeed_,
             bool genuine_,
-            Vertex particleVertex_
+            Vertex vertex_
         );
 };
 

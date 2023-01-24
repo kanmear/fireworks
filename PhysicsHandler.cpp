@@ -13,11 +13,14 @@ using namespace std;
 float PhysicsHandler::gravity = 9.8f;
 vector<future<void>> PhysicsHandler::futures = vector<future<void>>();
 
+void handleVertexes();
+
 void calculateParticlesMovement(int amountOfParticles, Vector2<float> position, Color color, bool isRandomSpread = false, float distanceModifier = 1.f); 
 void launchParticle(Vector2<float> position, float x, float y, Color color); 
 
 // TODO replace comments with appropriately named functions
 void PhysicsHandler::handle() {
+  handleVertexes();
     for (int i = 0; i < FireworkHandler::fireworksVector.size(); i++) {
       // moving and deleting rockets
       FireworkRocket &rocket = FireworkHandler::fireworksVector[i];
@@ -75,7 +78,7 @@ void PhysicsHandler::handle() {
     if (true) {
       for (int j = 0; j < FireworkParticleHandler::particlesVector.size(); j++) {
         FireworkParticle &particle = FireworkParticleHandler::particlesVector[j];
-        Vertex &vertex = particle.particleVertex;
+        Vertex &vertex = particle.vertex;
 
         if (particle.genuine) {
           int rand = Utility::getRandomIntInRange(1, 2);
@@ -101,7 +104,7 @@ void PhysicsHandler::handle() {
     for (int j = 0; j < FireworkParticleHandler::particlesVector.size(); j++) {
       // moving and deleting particles
       FireworkParticle &particle = FireworkParticleHandler::particlesVector[j];
-      Vertex &vertex = particle.particleVertex;
+      Vertex &vertex = particle.vertex;
       float &vSpeed = particle.vSpeed;
       float &hSpeed = particle.hSpeed;
 
@@ -125,6 +128,10 @@ void PhysicsHandler::handle() {
     if (FireworkParticleHandler::particlesVector.size() == 0) {
       PhysicsHandler::futures.clear();
     }
+}
+
+void handleVertexes() {
+
 }
 
 void calculateParticlesMovement(int amountOfParticles, Vector2<float> position, Color color, bool isRandomSpread, float distanceModifier) {
