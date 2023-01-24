@@ -1,15 +1,11 @@
 CXX := g++
 LIBS = -lsfml-graphics -lsfml-window -lsfml-system
-PROFILER = -pg
 
 # install: fireworks-app
 # 	mv fireworks 
 
 clean:
 	rm -f fireworks-app *.o
-
-profiler: main.o FireworkRocket.o FireworkParticle.o PhysicsHandler.o DebugHandler.o Utility.o
-	$(CXX) $(PROFILER) -o fireworks-app main.o FireworkRocket.o FireworkParticle.o PhysicsHandler.o DebugHandler.o Utility.o $(LIBS)
 
 fireworks-app: main.o FireworkRocket.o FireworkParticle.o PhysicsHandler.o DebugHandler.o Utility.o
 	$(CXX) -o fireworks-app main.o FireworkRocket.o FireworkParticle.o PhysicsHandler.o DebugHandler.o Utility.o $(LIBS)
