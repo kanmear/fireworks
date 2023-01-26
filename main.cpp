@@ -3,6 +3,7 @@
 #include "FireworkParticle.h"
 #include "DebugHandler.h"
 #include "Utility.h"
+#include "Settings.h"
 #include <SFML/Graphics.hpp>
 #include <SFML/Graphics/CircleShape.hpp>
 #include <vector>
@@ -20,7 +21,6 @@ void drawDebug(RenderWindow &window);
 void drawRockets(RenderWindow &window);
 
 int main() {
-    // TODO replace hardcoded values with enum variables
   RenderWindow window(VideoMode(200, 200), "fireworks");
   configureWindow(window);
   DebugHandler::setFont();
@@ -76,10 +76,15 @@ void updateWindow(RenderWindow &window) {
 }
 
 void drawDebug(RenderWindow &window) {
-  // DebugHandler::addNewText("fps", 
-  //   to_string(Utility::calculateFPS()));
-  // DebugHandler::addNewText("amount of particles", 
-  //   to_string(FireworkParticleHandler::particlesVector.size()));
+  if (Settings::DISPLAY_FPS)
+    DebugHandler::addNewText("fps", 
+      to_string(Utility::calculateFPS()));
+  if (Settings::DISPLAY_PARTICLES)
+    DebugHandler::addNewText("amount of particles", 
+      to_string(FireworkParticleHandler::particlesVector.size()));
+  if (Settings::DISPLAY_FUTURES)
+    DebugHandler::addNewText("futures", 
+      to_string(PhysicsHandler::futures.size()));
 
   for (int i = 0; i < DebugHandler::textVector.size(); i++) {
     window.draw(DebugHandler::textVector[i]);

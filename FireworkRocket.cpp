@@ -1,4 +1,5 @@
 #include "FireworkRocket.h"
+#include "Settings.h"
 #include <cmath>
 
 using namespace std;
@@ -6,7 +7,7 @@ using namespace std;
 vector<FireworkRocket> FireworkHandler::fireworksVector = vector<FireworkRocket>();
 
 FireworkRocket::FireworkRocket(
-    int amountOfStars_ = 60, 
+    int amountOfStars_ = Settings::DEFAULT_AMOUNT_OF_STARS, 
     float vSpeed_ = 1.f,
     float hSpeed_ = 1.f,
     Vertex vertex_ = Vertex()) 
@@ -24,7 +25,8 @@ vSpeed(vSpeed_), hSpeed(hSpeed_) {
         Utility::windowWidth / 2,
         Utility::windowHeight);
     
-    explosionPositionY = Utility::windowHeight * (1.f / 3.f) + Utility::getRandomIntInRange(1, Utility::windowHeight / 7);
+    explosionPositionY = Utility::windowHeight * (1.f / 3.f) 
+        + Utility::getRandomIntInRange(1, Utility::windowHeight / 7);
 }
 
 void FireworkHandler::launch() {
